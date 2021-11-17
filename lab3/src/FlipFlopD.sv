@@ -2,9 +2,9 @@ module FlipFlopD (d, clk, q);
 
 parameter WIDTH = 4;
 
-   input		[WIDTH-1:0]	d;
+   	input		[WIDTH-1:0]	d;
 	input 					clk;
-   output reg	[WIDTH-1:0] q;
+   	output logic [WIDTH-1:0] q;
 	
 	// Register with active-low clock
 	
