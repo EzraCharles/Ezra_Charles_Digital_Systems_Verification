@@ -1,31 +1,13 @@
-module FlipFlopD (d, clk, q);
+module FlipFlopD (
+	input bit cclk,
+	input bit rst_n,
+	input logic enb,
+	input logic d,
+	input logic q
+);
 
-parameter WIDTH = 4;
+`include "FF_D.def"
 
-   	input		[WIDTH-1:0]	d;
-	input 					clk;
-   	output logic [WIDTH-1:0] q;
-	
-	// Register with active-low clock
-	
-`ifdef posRST
-	initial $display("posRST is defined");
-	initial $info("posRST is defined");
-	
-   always @ (posedge clk)
-	begin
-      q <= d;
-	end
-	
-`else
-	initial $display("posRST is not defined");
-	initial $info("posRST is not defined");
-		
-	always @ (negedge clk)
-	begin
-      q <= d;
-	end
-	
-`endif
-	
+FF_D(cclk, "negedge", rst_n, enb, d, q);
+
 endmodule
