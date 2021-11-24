@@ -1,21 +1,22 @@
 `define FF_D(clk, myedge="negedge", rst, en, d, q) \
-generate \
-    case (``myedge) \
-        "posedge" : begin\
-            always_ff@(posedge ``clk or posedge ``rst) begin \
+generate case (``myedge) \
+    "posedge" : begin\
+        always_ff@(posedge ``clk or posedge ``rst) begin \
             if(``rst)\
                 ``q <= '0;\
             else if(``en)\
                 ``q <= ``d;\
-            end\
         end\
-        "negedge" : begin\
+    end\
+    "negedge" : begin\
         always_ff@(posedge ``clk, negedge ``rst) begin \
             if(!``rst)\
-                ``q <= '0:\
+                ``q <= '0;\
             else if(``en)\
                 ``q <= ``d;\
-            end\
         end\
-    endcase
-endgenerate
+    end\
+    default: begin\
+        $fatal(1, "The input 'myedge' from FF_D is invalid.");\
+    end\
+endcase endgenerate\

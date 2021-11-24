@@ -1,0 +1,20 @@
+`define SEVERITY(severity="info", msg="Message") \
+generate\
+    case (``severity) \
+        "info" : begin\
+            $info("INFO: %s", ``msg);\
+        end\
+        "warning" : begin\
+            $warning("WARNING: %s", ``msg);\
+        end\
+        "error" : begin\
+            $error("ERROR: %s", ``msg);\
+        end\
+        "fatal" : begin\
+            $fatal("FATAL ERROR: %s", ``msg);\
+        end\
+        default: begin\
+            fatal("FATAL ERROR: The user input on 'severity' is invalid");\
+        end\
+    endcase\
+endgenerate\
