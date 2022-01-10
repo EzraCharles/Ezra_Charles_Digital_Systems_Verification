@@ -10,7 +10,7 @@ module tb_flipflop();
     FF_D(.clk(clk), .myedge("negedge"), .rst(rst), .d(d), .q(q), .en(en));
 
     initial begin
-        rsy <= 0;
+        rst <= 0;
         d   <= 4'b0000;
         clk <= 0;
 
