@@ -3,9 +3,9 @@
 module tb_flipflop();
     parameter       WIDTH = 4;
     input bit       clk, rst;
-    input logic     [0 : WIDTH - 1] d;
     input logic     en;
-    output logic    q;
+    input logic     [WIDTH - 1:0] d;
+    output logic    [WIDTH - 1:0] q;
 
     FF_D_WRAPPER(.clk(clk), .myedge("negedge"), .rst(rst), .d(d), .q(q), .en(en));
 
