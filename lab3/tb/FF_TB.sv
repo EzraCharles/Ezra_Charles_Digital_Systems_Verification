@@ -1,21 +1,25 @@
-`define FF_D(clk, myedge="negedge", rst, en, d, q) \
-generate \
-    case (``myedge) \
-        "posedge" : begin\
-            always_ff@(posedge ``clk or posedge ``rst) begin \
-            if(``rst)\
-                ``q <= '0;\
-            else if(``en)\
-                ``q <= ``d;\
-            end\
-        end\
-        "negedge" : begin\
-        always_ff@(posedge ``clk, negedge ``rst) begin \
-            if(!``rst)\
-                ``q <= '0:\
-            else if(``en)\
-                ``q <= ``d;\
-            end\
-        end\
-    endcase
-endgenerate
+`timescale 10ps/1ps
+
+module tb_flipflop();
+    parameter       WIDTH = 4;
+    input bit       clk, rst;
+    input logic     [0 : WIDTH - 1] d;
+    input logic     en;
+    output logic    q;
+
+    FF_D(.clk(clk), .myedge("negedge"), .rst(rst), .d(d), .q(q), .en(en));
+
+    initial begin
+        rsy <= 0;
+        d   <= 4'b0000;
+        clk <= 0;
+
+        #10 reset   <= 1;
+        #10 d       <= 4'b0001;
+        #10 reset   <= 0;
+        #10 d       <= 4'b0010;
+        #10 reset   <= 0;
+        #10 d       <= 4'b0100;
+    end		
+    
+endmodule
