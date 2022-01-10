@@ -7,7 +7,7 @@ module tb_flipflop();
     input logic     en;
     output logic    q;
 
-    FF_D(.clk(clk), .myedge("negedge"), .rst(rst), .d(d), .q(q), .en(en));
+    FF_D_WRAPPER(.clk(clk), .myedge("negedge"), .rst(rst), .d(d), .q(q), .en(en));
 
     initial begin
         rst <= 0;
